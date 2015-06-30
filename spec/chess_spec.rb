@@ -93,8 +93,19 @@ RSpec.describe Chess do
   #   an array of.... uhm....
   #   (when joined, gives like: ['f2', 'f3'])
 
-  # move(from, to)
-  #   moves the piece at `from` to `to`
+  describe 'move' do
+    it 'moves the piece from the first location to the second location' do
+      game = Chess.new
+      game.move 'f2', 'f3'
+
+      piece = game['f2']
+      expect(piece.type).to eq :empty_square
+
+      piece = game['f3']
+      expect(piece.type).to eq :pawn
+      expect(piece.colour).to eq :white
+    end
+  end
 
   # -------------------------------
   # some future point:

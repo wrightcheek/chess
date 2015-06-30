@@ -48,8 +48,14 @@ class Chess
       @board[y][x]
     end
 
-    def []=(x, y, piece)
+    def []=(x, y=nil, piece)
+      x, y = self.class.to_indeces(x) if y.nil?
       @board[y][x] = piece
+    end
+
+    def move(from, to)
+      self[to]   = self[from]
+      self[from] = Piece.new :empty_square, :none
     end
   end
 end

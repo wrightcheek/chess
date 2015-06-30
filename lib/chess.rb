@@ -30,7 +30,7 @@ class Chess
 
   def move(from, to)
     @players.rotate!
-    ??
+    @board.move from, to
   end
 
   def to_s
