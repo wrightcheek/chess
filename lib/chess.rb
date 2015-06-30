@@ -1,7 +1,7 @@
 require 'chess/board'
 
 class Chess
-  attr_reader :status
+  attr_reader :status, :winning_player
 
   def initialize(board: Board.default)
     @status  = :in_progress
@@ -25,7 +25,18 @@ class Chess
   end
 
   def possible_moves_from(location)
-    ['f2', 'f3']
+    @fake_moves ||= [
+      ['f3', 'f4'],
+      ['e5', 'e6'],
+      ['g3', 'g4'],
+      ['h4', 'g5', 'f6', 'e7']
+    ]
+    @fake_moves.shift
+  ensure
+    if @fake_moves.empty?
+      @status = :checkmate
+      @winning_player = current_player
+    end
   end
 
   def move(from, to)

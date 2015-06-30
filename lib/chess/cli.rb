@@ -37,7 +37,7 @@ class Chess
     attr_reader :game
 
     def show_game_summary
-      "#{game.status.to_s.capitalize}, #{game.current_player} wins.\n"
+      "#{game.status.to_s.capitalize}, #{game.winning_player} wins.\n"
     end
 
     def show_move_summary(from, to)
@@ -60,7 +60,7 @@ class Chess
     end
 
     def show_turn
-      "#{game.current_player}'s turn"
+      "#{game.current_player}'s turn."
     end
   end
 end

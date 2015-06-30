@@ -102,6 +102,11 @@ RSpec.describe Chess do
     end
   end
 
+  # winning_player
+  #   nil if no one has won
+  #   nil if checkmate
+  #   otherwise, whoever took the winning move
+
   # -------------------------------
   # some future point:
   #   what happens when you can't move here?

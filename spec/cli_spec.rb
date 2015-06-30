@@ -52,9 +52,9 @@ RSpec.describe Chess::CLI do
       "7  ♟  ♟  ♟  ♟     ♟  ♟  ♟\n" +
       "6                        \n" +
       "5              ♟         \n" +
-      "4                    ♙   \n" +
+      "4                        \n" +
       "3                 ♙      \n" +
-      "2  ♙  ♙  ♙  ♙  ♙        ♙\n" +
+      "2  ♙  ♙  ♙  ♙  ♙     ♙  ♙\n" +
       "1  ♖  ♘  ♗  ♕  ♔  ♗  ♘  ♖\n" +
       "   a  b  c  d  e  f  g  h\n" +
       "white's turn.\n" +
@@ -80,7 +80,7 @@ RSpec.describe Chess::CLI do
       "moves for black queen d8: h4, g5, f6, e7\n" +
       "black, move d8 where? " +
       "\n" +
-      "Ok, black's pawn d8 to h4.\n" +
+      "Ok, black's queen d8 to h4.\n" +
       "\n" +
 
       "8  ♜  ♞  ♝     ♚  ♝  ♞  ♜\n" +
