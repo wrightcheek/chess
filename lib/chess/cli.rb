@@ -10,7 +10,7 @@ class Chess
 
     def call
       while game.playing?
-        @stdout.puts show_board
+        @stdout.puts game
         @stdout.puts show_turn
         @stdout.puts prompt_from_location
         from = @stdin.gets.chomp
@@ -25,7 +25,7 @@ class Chess
         @stdout.puts
       end
 
-      @stdout.puts show_board
+      @stdout.puts game
       @stdout.puts
       @stdout.puts show_game_summary
       0
@@ -60,36 +60,6 @@ class Chess
 
     def show_turn
       "#{game.current_player}'s turn"
-    end
-
-    def show_board
-      lines = 8.times.map do |x|
-        pieces = 8.times.map { |y| avatar_for game[x, y] }.join('  ')
-        "#{8-x}  #{pieces}\n"
-      end
-      lines.join + "   a  b  c  d  e  f  g  h\n"
-    end
-
-    def avatar_for(piece)
-      avatars = {
-        black: {
-          rook:   '♜',
-          knight: '♞',
-          bishop: '♝',
-          queen:  '♛',
-          king:   '♚',
-          pawn:   '♟',
-        },
-        white: {
-          rook:   '♖',
-          knight: '♘',
-          bishop: '♗',
-          queen:  '♕',
-          king:   '♔',
-          pawn:   '♙',
-        }
-      }
-      avatars[piece.colour][piece.type]
     end
   end
 end
