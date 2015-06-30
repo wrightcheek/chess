@@ -61,12 +61,17 @@ RSpec.describe Chess do
   end
 
   describe '#[]' do
-    example 'game[0, 1] at the location of x and y, as integer indexes' do
+    example 'game[3, 0] at the location of x and y, as integer indexes' do
       piece = Chess.new[3, 0]
       expect(piece.type).to   eq :queen
       expect(piece.colour).to eq :black
     end
-    example "game['f2'] is the same as game[5, 7]"
+
+    example "game['d8'] is the same as game[3, 0]" do
+      piece = Chess.new['d8']
+      expect(piece.type).to   eq :queen
+      expect(piece.colour).to eq :black
+    end
   end
 
   describe '#current_player' do

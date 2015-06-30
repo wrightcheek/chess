@@ -29,6 +29,13 @@ class Chess
       new overrides
     end
 
+    def self.to_indeces(letter_notation)
+      letter, number = letter_notation.chars
+      x = letter.ord - 'a'.ord
+      y = 8 - number.to_i
+      [x, y]
+    end
+
     def initialize(overrides={})
       @board = Array.new 8 do
         Array.new(8) { Piece.new :empty_square, :none }
@@ -36,7 +43,8 @@ class Chess
       overrides.each { |(x, y), piece| self[x, y] = piece }
     end
 
-    def [](x, y)
+    def [](x, y=nil)
+      x, y = self.class.to_indeces(x) if y.nil?
       @board[y][x]
     end
 
