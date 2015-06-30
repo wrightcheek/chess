@@ -1,4 +1,4 @@
-require 'chess'
+require 'chess/cli'
 require 'stringio'
 
 RSpec.describe Chess::CLI do
