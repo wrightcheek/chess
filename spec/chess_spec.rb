@@ -60,15 +60,29 @@ RSpec.describe Chess do
     expect(stalemated_game).to_not be_playing
   end
 
-  # []
-  #   return a piece
-  #   game[0, 1] means x and y index as integers
-  #   game['f2'] is the same as game[5, 7]
+  describe '#[]' do
+    example 'game[0, 1] at the location of x and y, as integer indexes' do
+      piece = Chess.new[3, 0]
+      expect(piece.type).to   eq :queen
+      expect(piece.colour).to eq :black
+    end
+    example "game['f2'] is the same as game[5, 7]"
+  end
 
-  # current_player
-  #   starts at :white
-  #   switches between :white, and :black
-  #   switches after moving
+  describe '#current_player' do
+    it 'starts at :white' do
+      expect(Chess.new.current_player).to eq :white
+    end
+
+    it 'switches between :white, and :black after each move' do
+      game = Chess.new
+      expect(game.current_player).to eq :white
+      game.move('a2', 'a3')
+      expect(game.current_player).to eq :black
+      game.move('a7', 'a6')
+      expect(game.current_player).to eq :white
+    end
+  end
 
   # possible_moves_from
   #   an array of.... uhm....

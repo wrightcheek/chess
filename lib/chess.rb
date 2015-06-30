@@ -11,8 +11,9 @@ class Chess
   attr_reader :status
 
   def initialize(board: Board.default)
-    @status = :in_progress
-    @board  = board
+    @status  = :in_progress
+    @board   = board
+    @players = [:white, :black]
   end
 
   def playing?
@@ -27,7 +28,7 @@ class Chess
   end
 
   def current_player
-    :white
+    @players.first
   end
 
   def possible_moves_from(location)
@@ -35,6 +36,7 @@ class Chess
   end
 
   def move(from, to)
+    @players.rotate!
     ??
   end
 
