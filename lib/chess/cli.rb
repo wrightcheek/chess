@@ -19,11 +19,11 @@ class Chess
         @stdout.print prompt_to_location(from)
         to = @stdin.gets.chomp
 
-        game.move from, to
-
         @stdout.puts
         @stdout.puts show_move_summary(from, to)
         @stdout.puts
+
+        game.move from, to
       end
 
       @stdout.puts game
@@ -41,7 +41,7 @@ class Chess
     end
 
     def show_move_summary(from, to)
-      "Ok, #{game.current_player}'s #{game[to].type} #{from} to #{to}."
+      "Ok, #{game.current_player}'s #{game[from].type} #{from} to #{to}."
     end
 
     def show_available_moves(from_location)
