@@ -1,3 +1,5 @@
+require 'chess/board'
+
 class Chess
   class Piece
     attr_reader :type, :colour
@@ -6,38 +8,11 @@ class Chess
     end
   end
 
-  def initialize
-    @board = Array.new 8 do
-      Array.new(8) { Piece.new :empty_square, :none }
-    end
-    @board[0] = [
-      Piece.new(:rook,   :black),
-      Piece.new(:knight, :black),
-      Piece.new(:bishop, :black),
-      Piece.new(:queen,  :black),
-      Piece.new(:king,   :black),
-      Piece.new(:bishop, :black),
-      Piece.new(:knight, :black),
-      Piece.new(:rook,   :black),
-    ]
+  attr_reader :status
 
-    @board[1]  = Array.new(8) { Piece.new :pawn, :black }
-    @board[-2] = Array.new(8) { Piece.new :pawn, :white }
-
-    @board[-1] = [
-      Piece.new(:rook,   :white),
-      Piece.new(:knight, :white),
-      Piece.new(:bishop, :white),
-      Piece.new(:queen,  :white),
-      Piece.new(:king,   :white),
-      Piece.new(:bishop, :white),
-      Piece.new(:knight, :white),
-      Piece.new(:rook,   :white),
-    ]
-  end
-
-  def status
-    :checkmate
+  def initialize(board: Board.default)
+    @status = :in_progress
+    @board  = board
   end
 
   def playing?
@@ -48,7 +23,7 @@ class Chess
   # x, y means x and y index as integers
   # if only a x, then we have a location like 'f2'
   def [](x, y=nil)
-    @board[y][x]
+    @board[x, y]
   end
 
   def current_player

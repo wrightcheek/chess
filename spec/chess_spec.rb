@@ -14,10 +14,28 @@ RSpec.describe Chess do
       "   a  b  c  d  e  f  g  h\n"
   end
 
-  # status
-  #   :checkmate
-  #   :stalemate
-  #   :in_progress <-- starting value
+  describe 'status' do
+    specify ':in_progress, at game start' do
+      expect(Chess.new.status).to eq :in_progress
+    end
+
+    specify ':checkmate    after a player wins' do
+      pending 'need more abstractions :)'
+      board_white_wins = ??
+      game_white_wins  = Chess.new(board: board_white_wins)
+      expect(game_white_wins.status).to eq :checkmate
+
+      board_black_wins = ??
+      game_black_wins  = Chess.new(board: board_black_wins)
+      expect(game_black_wins.status).to eq :checkmate
+      # "8 ♖  ♚ "
+      # "7 ♖    "
+      # "6 K    "
+      # "   a  b "
+    end
+
+    specify ':stalemate    when.... go read the rules :P'
+  end
 
   # playing?
   #   when the status is :in_progress
