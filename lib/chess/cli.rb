@@ -10,14 +10,15 @@ class Chess
 
     def call
       while game.playing?
-        @stdout.puts game
-        @stdout.puts show_turn
-        @stdout.puts prompt_from_location
+        @stdout.puts  game
+        @stdout.puts  show_turn
+        @stdout.print prompt_from_location
         from = @stdin.gets.chomp
 
-        @stdout.puts show_available_moves(from)
-        @stdout.puts prompt_to_location(from)
+        @stdout.puts  show_available_moves(from)
+        @stdout.print prompt_to_location(from)
         to = @stdin.gets.chomp
+
         game.move from, to
 
         @stdout.puts
