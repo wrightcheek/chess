@@ -1,13 +1,6 @@
 require 'chess/board'
 
 class Chess
-  class Piece
-    attr_reader :type, :colour
-    def initialize(type, colour)
-      @type, @colour = type, colour
-    end
-  end
-
   attr_reader :status
 
   def initialize(board: Board.default)

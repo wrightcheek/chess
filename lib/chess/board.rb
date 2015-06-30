@@ -1,3 +1,5 @@
+require 'chess/piece'
+
 class Chess
   class Board
     def self.default
