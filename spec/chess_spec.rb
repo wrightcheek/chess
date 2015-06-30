@@ -102,10 +102,22 @@ RSpec.describe Chess do
     end
   end
 
-  # winning_player
-  #   nil if no one has won
-  #   nil if checkmate
-  #   otherwise, whoever took the winning move
+  describe 'winning_player' do
+    it 'is nil if no one has won' do
+      expect(Chess.new.winning_player).to be_nil
+    end
+
+    it 'is nil if stalemate' do
+      pending 'implement me!'
+      expect(stalemated_game).to be_nil
+    end
+
+    specify 'otherwise, whoever took the winning move' do
+      pending 'implement me!'
+      expect(game_white_wins.winning_player).to eq :white
+      expect(game_black_wins.winning_player).to eq :black
+    end
+  end
 
   # -------------------------------
   # some future point:

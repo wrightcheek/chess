@@ -9,6 +9,7 @@ class Chess
     @players = [:white, :black]
   end
 
+  # FIXME!!
   def playing?
     @playings ||= [true, true, true, true, false]
     @playings.shift
@@ -24,6 +25,7 @@ class Chess
     @players.first
   end
 
+  # FIXME!!
   def possible_moves_from(location)
     @fake_moves ||= [
       ['f3', 'f4'],
