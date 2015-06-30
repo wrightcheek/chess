@@ -12,7 +12,7 @@ RSpec.describe Chess::CLI do
     stdin      = StringIO.new "f2\nf3\ne7\ne5\ng2\ng4\nd8\nh4\nTHIS IS NOT READ!"
     exitstatus = Chess::CLI.new(stdin, stdout).call
     expect(exitstatus).to eq 0
-    expect(stdin.string).to eq 'THIS IS NOT READ!'
+    expect(stdin.read).to eq 'THIS IS NOT READ!'
     expect(stdout.string).to eq \
       "8  ♜  ♞  ♝  ♛  ♚  ♝  ♞  ♜\n" +
       "7  ♟  ♟  ♟  ♟  ♟  ♟  ♟  ♟\n" +

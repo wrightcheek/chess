@@ -10,22 +10,24 @@ class Chess
 
     def call
       while game.playing?
-        @stdout.puts show_board(game.board)
-        print_turn
+        @stdout.puts show_board
+        @stdout.puts show_turn
+        @stdout.puts prompt_from_location
+        from = @stdin.gets.chomp
 
-        from = prompt_from_location
-        print_available_moves(from)
-        to = prompt_to_location
+        @stdout.puts show_available_moves(from)
+        @stdout.puts prompt_to_location(from)
+        to = @stdin.gets.chomp
         game.move from, to
 
-        empty_line
-        print_move_summary from, to
-        empty line
+        @stdout.puts
+        @stdout.puts show_move_summary(from, to)
+        @stdout.puts
       end
 
-      print_board game.board
-      empty_line
-      print_game_summary
+      @stdout.puts show_board
+      @stdout.puts
+      @stdout.puts show_game_summary
       0
     end
 
@@ -33,38 +35,58 @@ class Chess
 
     attr_reader :game
 
-    # game.moves_for(from_location)
-
-    def print_turn(player_colour)
-      @stdout.puts "#{player_colour}'s turn"
+    def show_game_summary
+      "#{game.status.to_s.capitalize}, #{game.current_player} wins.\n"
     end
 
-    def show_board(board)
+    def show_move_summary(from, to)
+      "Ok, #{game.current_player}'s #{game[to].type} #{from} to #{to}."
+    end
+
+    def show_available_moves(from_location)
+      piece          = game[from_location]
+      possible_moves = game.possible_moves_from(from_location).join(', ')
+
+      "moves for #{game.current_player} #{piece.type} #{from_location}: #{possible_moves}\n"
+    end
+
+    def prompt_from_location
+      "#{game.current_player}, your move? "
+    end
+
+    def prompt_to_location(from_location)
+      "#{game.current_player}, move #{from_location} where? "
+    end
+
+    def show_turn
+      "#{game.current_player}'s turn"
+    end
+
+    def show_board
       lines = 8.times.map do |x|
-        pieces = 8.times.map { |y| avatar_for board[x, y] }.join('  ')
+        pieces = 8.times.map { |y| avatar_for game[x, y] }.join('  ')
         "#{8-x}  #{pieces}\n"
       end
       lines.join + "   a  b  c  d  e  f  g  h\n"
     end
 
     def avatar_for(piece)
-      return '♜'
       avatars = {
         black: {
-          rook:   ♜,
-          knight: ♞,
-          bishop: ♝,
-          queen:  ♛,
-          king:   ♚,
-          pawn:   ♟,
+          rook:   '♜',
+          knight: '♞',
+          bishop: '♝',
+          queen:  '♛',
+          king:   '♚',
+          pawn:   '♟',
         },
         white: {
-          rook:   ♖,
-          knight: ♘,
-          bishop: ♗,
-          queen:  ♕,
-          king:   ♔,
-          pawn:   ♙,
+          rook:   '♖',
+          knight: '♘',
+          bishop: '♗',
+          queen:  '♕',
+          king:   '♔',
+          pawn:   '♙',
         }
       }
       avatars[piece.colour][piece.type]
