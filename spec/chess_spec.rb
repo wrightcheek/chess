@@ -1,6 +1,30 @@
 require 'chess'
 
 RSpec.describe Chess do
+
+  let(:game_white_wins) do
+    Chess.new board: Chess::Board.new(
+      [0, 0] => Chess::Piece.new(:rook, :white),
+      [0, 1] => Chess::Piece.new(:rook, :white),
+      [0, 2] => Chess::Piece.new(:king, :white),
+      [1, 0] => Chess::Piece.new(:king, :black),
+    )
+  end
+
+  let(:game_black_wins) do
+    Chess.new board: Chess::Board.new(
+      [0, 0] => Chess::Piece.new(:rook, :black),
+      [0, 1] => Chess::Piece.new(:rook, :black),
+      [0, 2] => Chess::Piece.new(:king, :black),
+      [1, 0] => Chess::Piece.new(:king, :white),
+    )
+  end
+
+  let(:in_progress_game) { Chess.new }
+  let(:checkmated_game)  { game_white_wins }
+  let(:stalemated_game)  { raise 'figure out what I am!' }
+
+
   it 'starts like a traditional chess board' do
     expect(Chess.new.to_s).to eq \
       "8  ♜  ♞  ♝  ♛  ♚  ♝  ♞  ♜\n"+
@@ -20,25 +44,21 @@ RSpec.describe Chess do
     end
 
     specify ':checkmate    after a player wins' do
-      pending 'need more abstractions :)'
-      board_white_wins = ??
-      game_white_wins  = Chess.new(board: board_white_wins)
+      pending 'Chess needs to work first :P'
       expect(game_white_wins.status).to eq :checkmate
-
-      board_black_wins = ??
-      game_black_wins  = Chess.new(board: board_black_wins)
       expect(game_black_wins.status).to eq :checkmate
-      # "8 ♖  ♚ "
-      # "7 ♖    "
-      # "6 K    "
-      # "   a  b "
     end
 
     specify ':stalemate    when.... go read the rules :P'
   end
 
-  # playing?
-  #   when the status is :in_progress
+
+  specify 'playing? is true, when the status is in_progress' do
+    expect(in_progress_game).to be_playing
+    pending 'need statuses to be correct'
+    expect(checkmated_game).to_not be_playing
+    expect(stalemated_game).to_not be_playing
+  end
 
   # []
   #   return a piece
