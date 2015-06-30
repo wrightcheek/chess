@@ -1,6 +1,10 @@
 require 'chess'
 
 RSpec.describe Chess do
+  def expect_piece(piece, type, colour)
+    expect(piece.type).to eq type
+    expect(piece.colour).to eq colour
+  end
 
   let(:game_white_wins) do
     Chess.new board: Chess::Board.new(
@@ -62,15 +66,11 @@ RSpec.describe Chess do
 
   describe '#[]' do
     example 'game[3, 0] at the location of x and y, as integer indexes' do
-      piece = Chess.new[3, 0]
-      expect(piece.type).to   eq :queen
-      expect(piece.colour).to eq :black
+      expect_piece Chess.new[3, 0], :queen, :black
     end
 
     example "game['d8'] is the same as game[3, 0]" do
-      piece = Chess.new['d8']
-      expect(piece.type).to   eq :queen
-      expect(piece.colour).to eq :black
+      expect_piece Chess.new['d8'], :queen, :black
     end
   end
 
@@ -97,13 +97,8 @@ RSpec.describe Chess do
     it 'moves the piece from the first location to the second location' do
       game = Chess.new
       game.move 'f2', 'f3'
-
-      piece = game['f2']
-      expect(piece.type).to eq :empty_square
-
-      piece = game['f3']
-      expect(piece.type).to eq :pawn
-      expect(piece.colour).to eq :white
+      expect_piece game['f2'], :empty_square, :none
+      expect_piece game['f3'], :pawn, :white
     end
   end
 
