@@ -30,7 +30,7 @@ class Chess
     end
 
     def self.to_indeces(letter_notation)
-      letter, number = letter_notation.chars
+      letter, number = letter_notation.to_s.chars
       x = letter.ord - 'a'.ord
       y = 8 - number.to_i
       [x, y]
